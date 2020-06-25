@@ -21,3 +21,33 @@ const expenseAmount = document.querySelector(".expense-amount-input");
 const addIncome = document.querySelector(".add-income");
 const incomeTitle = document.querySelector(".income-title-input");
 const incomeAmount = document.querySelector(".income-amount-input");
+
+// variables
+let ENTRY_LIST = [];
+let balance = 0, income = 0, outcome = 0;
+const DELETE = "delete", EDIT = "edit";
+
+// event listeners
+expenseBtn.addEventListener("click", function() {
+  show( expenseEl );
+  hide( [incomeEl, allEl] );
+  active( expenseBtn );
+  inactive( [incomeBtn, allBtn] );
+})
+incomeBtn.addEventListener("click", function() {
+  show( incomeEl );
+  hide( [incomeEl, allEl] );
+  active( expenseBtn );
+  inactive( [expenseBtn, allBtn] );
+})
+allBtn.addEventListener("click", function() {
+  show( allEl );
+  hide( [incomeEl, expenseEl] );
+  active( allBtn );
+  inactive( [incomeBtn, expenseBtn] );
+})
+
+// helpers
+function show(element) {
+  
+}
