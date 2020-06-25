@@ -29,25 +29,49 @@ const DELETE = "delete", EDIT = "edit";
 
 // event listeners
 expenseBtn.addEventListener("click", function() {
-  show( expenseEl );
+  show(expenseEl);
   hide( [incomeEl, allEl] );
-  active( expenseBtn );
+  active(expenseBtn);
   inactive( [incomeBtn, allBtn] );
 })
 incomeBtn.addEventListener("click", function() {
-  show( incomeEl );
-  hide( [incomeEl, allEl] );
-  active( expenseBtn );
+  show(incomeEl);
+  hide( [expenseEl, allEl] );
+  active(incomeBtn);
   inactive( [expenseBtn, allBtn] );
 })
 allBtn.addEventListener("click", function() {
-  show( allEl );
+  show(allEl);
   hide( [incomeEl, expenseEl] );
-  active( allBtn );
+  active(allBtn);
   inactive( [incomeBtn, expenseBtn] );
+})
+
+addExpense.addEventListener("click", function() {
+  // if one of the inputs is empty => exit
+  if (!expenseTitle.value || !expenseAmount.value) return;
+
+  // save the entry to the ENTRY_LIST
+  
 })
 
 // helpers
 function show(element) {
-  
+  element.classList.remove("hide");
+}
+
+function hide( elements ) {
+  elements.forEach( element => {
+    element.classList.add("hide");
+  })
+}
+
+function active(element) {
+  element.classList.add("active");
+}
+
+function inactive( elements ) {
+  elements.forEach( element => {
+    element.classList.remove("active");
+  })
 }
