@@ -15,3 +15,9 @@ const incomeBtn = document.querySelector(".tab2");
 const allBtn = document.querySelector(".tab3");
 
 // input buttons
+const addExpense = document.querySelector(".add-expense");
+const expenseTitle = document.querySelector(".expense-title-input");
+const expenseAmount = document.querySelector(".expense-amount-input");
+const addIncome = document.querySelector(".add-income");
+const incomeTitle = document.querySelector(".income-title-input");
+const incomeAmount = document.querySelector(".income-amount-input");
