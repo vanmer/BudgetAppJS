@@ -9,11 +9,13 @@ const incomeList = document.querySelector("#income .list");
 const expenseList = document.querySelector("#expense .list");
 const allList = document.querySelector("#all .list");
 
+//==============================================================================
 // select buttons
 const expenseBtn = document.querySelector(".tab1");
 const incomeBtn = document.querySelector(".tab2");
 const allBtn = document.querySelector(".tab3");
 
+//==============================================================================
 // input buttons
 const addExpense = document.querySelector(".add-expense");
 const expenseTitle = document.getElementById("expense-title-input");
@@ -22,6 +24,7 @@ const addIncome = document.querySelector(".add-income");
 const incomeTitle = document.getElementById("income-title-input");
 const incomeAmount = document.getElementById("income-amount-input");
 
+//==============================================================================
 // variables
 let ENTRY_LIST = [];
 let balance = 0, income = 0, outcome = 0;
@@ -31,8 +34,9 @@ const DELETE = "delete", EDIT = "edit";
 ENTRY_LIST = JSON.parse(localStorage.getItem("entry_list")) || [];
 updateUI();
 
-
+//==============================================================================
 // event listeners
+// select tabs
 expenseBtn.addEventListener("click", function() {
   show(expenseEl);
   hide([incomeEl, allEl]);
@@ -87,7 +91,25 @@ addIncome.addEventListener("click", function() {
   clearInput( [incomeTitle.value, incomeAmount.value] );
 })
 
+// delete or edit buttons
+incomeList.addEventListener("click", deleteOrEdit);
+expenseList.addEventListener("click", deleteOrEdit);
+allList.addEventListener("click", deleteOrEdit);
+
+//==============================================================================
 // helpers
+function deleteOrEdit(event) {
+  const targetBtn = event.target;
+  const entry = targetBtn.parentNode;
+
+  if (targetBtn.id == DELETE) {
+      deleteEntry();
+  } else if (targetBtn.id == EDIT) {
+      editEntry();
+  }
+}
+
+
 function updateUI() {
   income = calculateTotal("income", ENTRY_LIST);
   outcome = calculateTotal("expense", ENTRY_LIST);
