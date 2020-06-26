@@ -11,3 +11,9 @@ chart.appendChild(canvas);
 
 // get context of canvas
 const ctx = canvas.getContext("2d");
+
+// change the line width
+ctx.lineWidth = 8;
+
+// circle radius
+const R = 20;
