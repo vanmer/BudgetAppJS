@@ -24,11 +24,8 @@ const incomeAmount = document.getElementById("income-amount-input");
 
 // variables
 let ENTRY_LIST = [];
-let balance = 0,
-  income = 0,
-  outcome = 0;
-const DELETE = "delete",
-  EDIT = "edit";
+let balance = 0, income = 0, outcome = 0;
+const DELETE = "delete", EDIT = "edit";
 
 // event listeners
 expenseBtn.addEventListener("click", function() {
@@ -101,12 +98,23 @@ function updateUI() {
     if ( entry.type == "expense" ) {
         showEntry( expenseList, entry.type, entry.title, entry.amount, index)
     } else if ( entry.type == "income" ) {
+        showEntry( incomeList, entry.type, entry.title, entry.amount, index)
+    } else {
         showEntry( allList, entry.type, entry.title, entry.amount, index)
     }
   });
 }
 
+function showEntry( list, type, title, amount, id) {
+  const entry = `<li id="${id}" class="${type}">
+                   <div class="entry">${title}: $${amount}</div>
+                   <div id="edit"></div>
+                   <div id="delete"></div>
+                </li>`;
+  const position = "afterbegin";
 
+  list.insertAdjacentHTML(position, entry);
+}
 
 function clearElement( elements ) {
   elements.forEach( element => {
