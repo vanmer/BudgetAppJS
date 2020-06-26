@@ -90,13 +90,35 @@ function updateUI() {
   income = calculateTotal("income", ENTRY_LIST);
   outcome = calculateTotal("expense", ENTRY_LIST);
   balance = calculateBalance(income, outcome);
+
+  // update UI
+  clearElement ( [expenseList, incomeList, allList] );
+
+  // determine sign of balance
+  let sign = (income >= outcome) ? "$" : "-$";
+
+  ENTRY_LIST.forEach( (entry, index) => {
+    if ( entry.type == "expense" ) {
+        showEntry( expenseList, entry.type, entry.title, entry.amount, index)
+    } else if ( entry.type == "income" ) {
+        showEntry( allList, entry.type, entry.title, entry.amount, index)
+    }
+  });
+}
+
+
+
+function clearElement( elements ) {
+  elements.forEach( element => {
+    element.innerHTML = "";
+  })
 }
 
 function calculateTotal(type, list) {
   let sum = 0;
   list.forEach( entry => {
     if ( entry.type == type ) {
-      sum += entry;
+      sum += entry.amount;
     }
   })
   return sum;
