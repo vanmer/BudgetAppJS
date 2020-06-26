@@ -102,6 +102,10 @@ function calculateTotal(type, list) {
   return sum;
 }
 
+function calculateBalance(income, outcome) {
+  return income - outcome;
+}
+
 function clearInput( inputs ) {
   inputs.forEach( input => {
     input.value = "";
