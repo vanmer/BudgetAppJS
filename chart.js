@@ -8,3 +8,6 @@ canvas.height = 50;
 
 // append canvas to chart element
 chart.appendChild(canvas);
+
+// get context of canvas
+const ctx = canvas.getContext("2d");
