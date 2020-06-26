@@ -116,7 +116,17 @@ function deleteEntry(entry) {
 }
 
 function editEntry(entry) {
-  
+  let ENTRY = ENTRY_LIST[entry.id];
+
+  if (ENTRY.type == "income") {
+    incomeAmount.value = ENTRY.amount;
+    incomeTitle.value = ENTRY.title;
+  } else if (ENTRY.type == "expense") {
+    expenseAmount.value = ENTRY.amount;
+    expenseTitle.value = ENTRY.title;
+  }
+
+  deleteEntry(entry);
 }
 
 
