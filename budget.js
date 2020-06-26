@@ -103,10 +103,20 @@ function deleteOrEdit(event) {
   const entry = targetBtn.parentNode;
 
   if (targetBtn.id == DELETE) {
-      deleteEntry();
+      deleteEntry(entry);
   } else if (targetBtn.id == EDIT) {
-      editEntry();
+      editEntry(entry);
   }
+}
+
+function deleteEntry(entry) {
+  ENTRY_LIST.splice( entry.id, 1 );
+
+  updateUI();
+}
+
+function editEntry(entry) {
+  
 }
 
 
