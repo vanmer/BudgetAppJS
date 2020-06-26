@@ -16,52 +16,104 @@ const allBtn = document.querySelector(".tab3");
 
 // input buttons
 const addExpense = document.querySelector(".add-expense");
-const expenseTitle = document.querySelector(".expense-title-input");
-const expenseAmount = document.querySelector(".expense-amount-input");
+const expenseTitle = document.getElementById("expense-title-input");
+const expenseAmount = document.getElementById("expense-amount-input");
 const addIncome = document.querySelector(".add-income");
-const incomeTitle = document.querySelector(".income-title-input");
-const incomeAmount = document.querySelector(".income-amount-input");
+const incomeTitle = document.getElementById("income-title-input");
+const incomeAmount = document.getElementById("income-amount-input");
 
 // variables
 let ENTRY_LIST = [];
-let balance = 0, income = 0, outcome = 0;
-const DELETE = "delete", EDIT = "edit";
+let balance = 0,
+  income = 0,
+  outcome = 0;
+const DELETE = "delete",
+  EDIT = "edit";
 
 // event listeners
 expenseBtn.addEventListener("click", function() {
   show(expenseEl);
-  hide( [incomeEl, allEl] );
+  hide([incomeEl, allEl]);
   active(expenseBtn);
-  inactive( [incomeBtn, allBtn] );
+  inactive([incomeBtn, allBtn]);
 })
+
 incomeBtn.addEventListener("click", function() {
   show(incomeEl);
-  hide( [expenseEl, allEl] );
+  hide([expenseEl, allEl]);
   active(incomeBtn);
-  inactive( [expenseBtn, allBtn] );
+  inactive([expenseBtn, allBtn]);
 })
+
 allBtn.addEventListener("click", function() {
   show(allEl);
-  hide( [incomeEl, expenseEl] );
+  hide([incomeEl, expenseEl]);
   active(allBtn);
-  inactive( [incomeBtn, expenseBtn] );
+  inactive([incomeBtn, expenseBtn]);
 })
 
 addExpense.addEventListener("click", function() {
   // if one of the inputs is empty => exit
   if (!expenseTitle.value || !expenseAmount.value) return;
 
-  // save the entry to the ENTRY_LIST
-  
+  // save the entry to ENTRY_LIST
+  let expense = {
+    type: "expense",
+    title: expenseTitle.value,
+    amount: expenseAmount.value
+  }
+  ENTRY_LIST.push(expense);
+
+  updateUI();
+  clearInput([expenseTitle.value, expenseAmount.value]);
+
+})
+
+addIncome.addEventListener("click", function() {
+  // if one of the inputs is empty => exit
+  if (!incomeTitle.value || !incomeAmount.value) return;
+
+  // save the entry to ENTRY_LIST
+  let income = {
+    type: "income",
+    title: incomeTitle.value,
+    amount: incomeAmount.value
+  }
+  ENTRY_LIST.push(income);
+
+  updateUI();
+  clearInput( [incomeTitle.value, incomeAmount.value] );
 })
 
 // helpers
+function updateUI() {
+  income = calculateTotal("income", ENTRY_LIST);
+  outcome = calculateTotal("expense", ENTRY_LIST);
+  balance = calculateBalance(income, outcome);
+}
+
+function calculateTotal(type, list) {
+  let sum = 0;
+  list.forEach( entry => {
+    if ( entry.type == type ) {
+      sum += entry;
+    }
+  })
+  return sum;
+}
+
+function clearInput( inputs ) {
+  inputs.forEach( input => {
+    input.value = "";
+  })
+}
+
 function show(element) {
   element.classList.remove("hide");
 }
 
-function hide( elements ) {
-  elements.forEach( element => {
+function hide(elements) {
+  elements.forEach(element => {
     element.classList.add("hide");
   })
 }
@@ -70,8 +122,8 @@ function active(element) {
   element.classList.add("active");
 }
 
-function inactive( elements ) {
-  elements.forEach( element => {
+function inactive(elements) {
+  elements.forEach(element => {
     element.classList.remove("active");
   })
 }
