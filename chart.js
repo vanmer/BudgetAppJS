@@ -5,3 +5,6 @@ const chart = document.querySelector(".chart");
 const canvas = document.createElement("canvas");
 canvas.width = 50;
 canvas.height = 50;
+
+// append canvas to chart element
+chart.appendChild(canvas);
