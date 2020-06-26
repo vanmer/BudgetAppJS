@@ -27,6 +27,11 @@ let ENTRY_LIST = [];
 let balance = 0, income = 0, outcome = 0;
 const DELETE = "delete", EDIT = "edit";
 
+// look if there is saved data in localStorage
+ENTRY_LIST = JSON.parse(localStorage.getItem("entry_list")) || [];
+updateUI();
+
+
 // event listeners
 expenseBtn.addEventListener("click", function() {
   show(expenseEl);
@@ -108,6 +113,8 @@ function updateUI() {
   });
 
   updateChart(income, outcome);
+
+  localStorage.setItem("entry_list", JSON.stringify(ENTRY_LIST));
 }
 
 function showEntry( list, type, title, amount, id) {
